@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +10,18 @@ namespace MusicPlayer
     {
         const int MIN_VOLUME = 0;
         const int MAX_VOLUME = 100;
+
+        bool Locked;
+
+        private bool _playing;
+
+        public bool Playing
+        {
+            get
+            {
+                return _playing;
+            }
+        }
 
         private int _volume;
         public int Volume
@@ -38,6 +50,52 @@ namespace MusicPlayer
 
         public Song[] Songs;
 
+        public void Lock()
+        {
+            Locked = true;
+            Console.WriteLine("Player is locked.");
+        }
+
+        public void Unlock()
+        {
+            Locked = false;
+            Console.WriteLine("Player is unlocked.");
+        }
+
+        public bool Stop()
+        {
+            if (!Locked)
+            {
+                _playing = false;
+
+                Console.WriteLine($"Player has stopped.");
+                return _playing;
+            }
+            else
+            {
+                Console.WriteLine("Player is locked. Cannot stop.");
+                return _playing;
+            }
+            
+        }
+
+        public bool Start()
+        {
+            if (!Locked)
+            {
+                _playing = true;
+
+                Console.WriteLine($"Player is playing: {Songs[0].Name}.");
+                return _playing;
+            }
+            else
+            {
+                Console.WriteLine("Player is locked. Cannot play.");
+                return _playing;
+            }
+
+        }
+
         public void VolumeUp()
         {
             Volume++;
@@ -48,19 +106,11 @@ namespace MusicPlayer
             Volume--;
         }
 
-        public void VolumeChange( int step)
+        public void VolumeChange(int step)
         {
             Volume += step;
         }
 
-        public void Play()
-        {
-            Console.WriteLine($"Player is playing: {Songs[0].Name}");
-        }
-
-        public void Stop()
-        {
-            Console.WriteLine("Player has stopped");
-        }
+       
     }
 }
