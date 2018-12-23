@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +16,7 @@ namespace MusicPlayer
 
 //            TraceInfo(player);
 
-            player.Play();
+            player.Start();
             player.VolumeUp();
             Console.WriteLine(player.Volume);
 
@@ -29,6 +29,16 @@ namespace MusicPlayer
             /*player.Volume = -25;
             Console.WriteLine(player.Volume);
             */
+
+            /*player.Playing = false; 
+            Impossible to do. */
+            
+
+            player.Stop();
+            player.Lock();
+            player.Start();
+            player.Unlock();
+            player.Start();
             player.Stop();
 
             Console.ReadLine();
@@ -70,5 +80,8 @@ namespace MusicPlayer
             Console.WriteLine(player.Songs.Length);
             Console.WriteLine(player.Volume);
         }
+
+        
     }
 }
+
